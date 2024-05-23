@@ -1,0 +1,120 @@
+Project Setup
+
+Front End
+Install Node.js and npm.
+
+Download and install Node.js from Node.js official website.
+Clone the repository and navigate to the client directory.
+git clone https://github.com/Sanskriti2027/ecommerce-chatbot.git
+cd ecommerce-chatbot/client
+
+Install dependencies.
+npm install
+
+Start the development server.
+npm start
+
+Backend
+Install Python 3 and pip.
+Download and install Python from Python official website.
+
+Clone the repository and navigate to the server directory.
+cd ../server
+
+Install dependencies.
+pip install -r requirements.txt
+
+Initialize the database.
+python init_db.py
+
+Start the Flask server.
+python app.py
+
+Architecture
+Front End
+React.js: Used for building a responsive and interactive user interface.
+Redux: Utilized for state management, ensuring consistent application state.
+OAuth 2.0: Implemented for secure user authentication.
+Backend
+Flask: Chosen for creating RESTful APIs to handle client requests.
+SQLite: Selected as the relational database for storing product data.
+SQLAlchemy: Employed as an ORM to facilitate database interactions.
+Data Creation
+
+Mock Data: Scripts were written to populate the database with more than 100 product entries to simulate a realistic e-commerce inventory.
+Example Script for Mock Data Creation
+
+# init_db.py
+from app import db, Product
+
+def create_mock_data():
+    products = [
+        Product(name='Laptop', description='High performance laptop', price=999.99, stock=50),
+        Product(name='Smartphone', description='Latest model smartphone', price=799.99, stock=100),
+        # Add more products here
+    ]
+    db.session.bulk_save_objects(products)
+    db.session.commit()
+
+if __name__ == '__main__':
+    db.create_all()
+    create_mock_data()
+
+
+Challenges and Solutions
+
+Session Management
+Challenge: Maintaining user session state across different components.
+Solution: Implemented Redux to manage and persist state, ensuring session continuity.
+
+Error Handling
+Challenge: Providing meaningful error messages and handling exceptions gracefully.
+Solution: Utilized Flask's error handler to manage exceptions and return informative error responses to the client.
+
+
+Sample Queries
+Search Query
+Endpoint: /search
+Method: GET
+Parameters: q (query string for searching products)
+
+Example Request:
+curl "http://localhost:5000/search?q=laptop"
+Example Response:
+[
+    {
+        "id": 1,
+        "name": "Laptop",
+        "description": "High performance laptop",
+        "price": 999.99,
+        "stock": 50
+    },
+    {
+        "id": 2,
+        "name": "Gaming Laptop",
+        "description": "Laptop with powerful graphics card",
+        "price": 1299.99,
+        "stock": 30
+    }
+]
+Product Detail Query
+Endpoint: /product/<id>
+Method: GET
+Parameters: id (product ID)
+
+Example Request:
+curl "http://localhost:5000/product/1"
+Example Response:
+{
+    "id": 1,
+    "name": "Laptop",
+    "description": "High performance laptop",
+    "price": 999.99,
+    "stock": 50
+}
+Conclusion
+This documentation outlines the setup, architecture, data creation, challenges, and sample queries for the e-commerce sales chatbot project. The project aims to enhance the user experience by providing a responsive chatbot interface that efficiently handles product searches and details, ensuring a seamless shopping experience. For more details, refer to the GitHub repository and project report.
+
+GitHub Repository
+Repository URL: https://github.com/Sanskriti2027/ecommerce-chatbot
+README.md: Contains setup instructions, architecture overview, and usage examples.
